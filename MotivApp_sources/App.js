@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Image, Text } from 'react-native';
+import { Button, TextInput, View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import logo from './assets/MotivApp.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
+const KVC = 0.000001;
 
 function LoginScreen({ navigation }) {
     const [text, onChangeText] = React.useState("");
@@ -90,36 +91,58 @@ function AccountScreen({ navigation }) {
     );
 }
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
-                <Text style={{bottom: 100, fontSize: 40, color: 'black'}}>
+                <Text style={{bottom: 65, fontSize: 40, color: 'black'}}>
                     0.00001 KVC
                 </Text>
+            <TouchableOpacity style={styles.button}>
                 <Button
-                    onPress={() => {alert("il t'en manques encore")}}
-                    title="Tâches"
+                    title="Faire 1h de sport"
                 />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
                 <Button
-                    onPress={() => {alert("Tqt ça va augmenter")}}
-                    title="Bourse"
+                    title="Remplir ou ranger le lave vaiselle"
                 />
-            <View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
                 <Button
-                    onPress={() => {alert("Ce service n'est pas disponible pour le moment.")}}
-                    title="Retrait"
+                    title="Faire le ménage"
                 />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
                 <Button
-                    onPress={() => {alert("C'est payant crois pas")}}
-                    title="Cadeaux"
+                    title="Faire à manger"
                 />
-            </View>
-            <View>
-                <Button style= {styles.button}
-                    onPress={() => {alert("On vous répondra pas.")}}
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Button
+                    title="Faire le linge"
+                />
+            </TouchableOpacity>
+            <View style={{bottom: -50}}>
+                <Button
                     title="Contactez-nous"
+                    color='red'
+                    onPress={() => navigation.navigate('Contactez-nous')}
                 />
             </View>
+        </View>
+    );
+}
+
+function Contact() {
+    return (
+        <View style={styles.container}>
+            <Image source={logo} style={{bottom : 55, width: 350, height : 350}} />
+            <Text style={{fontSize : 20}}>
+                POUR NOUS CONTACTER :
+            </Text>
+            <Text style={{bottom: -50, fontSize: 20, color: 'blue', textDecorationLine: 'underline'}}>
+                motivapp.contact@epitech.eu
+            </Text>
         </View>
     );
 }
@@ -131,6 +154,7 @@ function App() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="MotivApp" component={HomeScreen} />
                 <Stack.Screen name="Create account" component={AccountScreen} />
+                <Stack.Screen name="Contactez-nous" component={Contact} />
             </Stack.Navigator>
         </NavigationContainer>
     );
@@ -151,7 +175,15 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         backgroundColor: 'white',
         marginBottom: 10,
-  },
+    },
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        marginBottom: 20,
+        backgroundColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
 
 export default App;
