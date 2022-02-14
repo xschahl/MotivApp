@@ -1,8 +1,22 @@
-import * as React from 'react';
-import { Button, TextInput, View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import React, { useRef, useState }  from 'react';
+import { Button, TextInput, View, StyleSheet, Image, Text, TouchableOpacity, Animated, SafeAreaView} from 'react-native';
 import logo from './assets/MotivApp.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import kevin_pp from './assets/kevin_pp.jpeg'
+// Tab ICons...
+import home from './assets/home.png';
+import search from './assets/search.png';
+import notifications from './assets/bell.png';
+import settings from './assets/settings.png';
+import logout from './assets/logout.png';
+// Menu
+import menu from './assets/menu.png';
+import close from './assets/close.png';
+// Photo
+import photo from './assets/photo.jpg';
+import kevin from './assets/kevin.jpg';
+
 
 const Stack = createNativeStackNavigator();
 const KVC = 0.000001;
@@ -158,6 +172,9 @@ function SportScreen({ navigation }) {
             <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
                 01:00:00
             </Text>
+            <Text style={{fontSize: 25, fontWeight: 'bold', bottom: 130}}>
+                (+ 0.01 KVC)
+            </Text>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 {'"Il faut viser la lune, parce qu’au moins,\n si vous échouez, vous finirez dans les étoiles."'}
                 {'\n\nOscar Wilde'}
@@ -178,6 +195,9 @@ function MenageScreen({ navigation }) {
             <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
                 01:00:00
             </Text>
+            <Text style={{fontSize: 25, fontWeight: 'bold', bottom: 130}}>
+                (+ 0.01 KVC)
+            </Text>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 {'"La meilleure façon de prédire l’avenir\n est de le créer." \n\nPeter Drucker'}
             </Text>
@@ -196,6 +216,9 @@ function MangerScreen({ navigation }) {
         <View style={styles.container}>
             <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
                 00:30:00
+            </Text>
+            <Text style={{fontSize: 25, fontWeight: 'bold', bottom: 130}}>
+                (+ 0.01 KVC)
             </Text>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 {'"Croyez en vos rêves et ils se réaliseront peut-être. Croyez en vous et ils se réaliseront sûrement." \n\nMartin Luther King'}
@@ -216,6 +239,9 @@ function LingeScreen({ navigation }) {
             <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
                 00:30:00
             </Text>
+            <Text style={{fontSize: 25, fontWeight: 'bold', bottom: 130}}>
+                (+ 0.01 KVC)
+            </Text>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 {'"La sagesse suprême, c’est d’avoir des rêves assez grands pour ne pas les\n perdre de vue pendant qu’on les\n poursuit". \n\nFrancis Scott Fitzgerald'}
             </Text>
@@ -235,6 +261,9 @@ function VaiselleScreen({ navigation }) {
             <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
                 00:30:00
             </Text>
+            <Text style={{fontSize: 25, fontWeight: 'bold', bottom: 130}}>
+                (+ 0.01 KVC)
+            </Text>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 {'"Ce sont nos choix qui montrent qui\n nous sommes, bien  plus que nos capacités." \n\nJoanne K.Rowling'}
             </Text>
@@ -248,12 +277,223 @@ function VaiselleScreen({ navigation }) {
     );
 }
 
+function HomeScreen2({ navigation }) {
+  const [currentTab, setCurrentTab] = useState("Accueil");
+  // To get the curretn Status of menu ...
+  const [showMenu, setShowMenu] = useState(false);
+
+  // Animated Properties...
+
+  const offsetValue = useRef(new Animated.Value(0)).current;
+  // Scale Intially must be One...
+  const scaleValue = useRef(new Animated.Value(1)).current;
+  const closeButtonOffset = useRef(new Animated.Value(0)).current;
+
+  return (
+    <SafeAreaView style={styles.container2}>
+
+      <View style={{ justifyContent: 'flex-start', padding: 15 }}>
+        <Image source={kevin} style={{
+          width: 80,
+          height: 80,
+          borderRadius: 10,
+          marginTop: 8
+        }}></Image>
+
+        <Text style={{
+          fontSize: 20,
+          fontWeight: 'bold',
+          color: 'white',
+          marginTop: 20
+        }}>Kevin Spegt</Text>
+
+        <TouchableOpacity>
+          <Text style={{
+            marginTop: 6,
+            color: 'white'
+          }}>Voir le profile de Kevin</Text>
+        </TouchableOpacity>
+
+        <View style={{ flexGrow: 1, marginTop: 50 }}>
+          {
+            // Tab Bar Buttons....
+          }
+
+          {TabButton(currentTab, setCurrentTab, "Accueil", home)}
+          {TabButton(currentTab, setCurrentTab, "Recherche", search)}
+          {TabButton(currentTab, setCurrentTab, "Notifications", notifications)}
+          {TabButton(currentTab, setCurrentTab, "Réglages", settings)}
+
+        </View>
+
+        <View>
+          {TabButton(currentTab, setCurrentTab, "Déconnexion", logout)}
+        </View>
+
+      </View>
+
+      {
+        // Over lay View...
+      }
+
+      <Animated.View style={{
+        flexGrow: 1,
+        backgroundColor: 'white',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        paddingHorizontal: 15,
+        paddingVertical: 20,
+        borderRadius: showMenu ? 15 : 0,
+        // Transforming View...
+        transform: [
+          { scale: scaleValue },
+          { translateX: offsetValue }
+        ]
+      }}>
+
+        {
+          // Menu Button...
+        }
+
+        <Animated.View style={{
+          transform: [{
+            translateY: closeButtonOffset
+          }]
+        }}>
+          <TouchableOpacity onPress={() => {
+            // Do Actions Here....
+            // Scaling the view...
+            Animated.timing(scaleValue, {
+              toValue: showMenu ? 1 : 0.88,
+              duration: 300,
+              useNativeDriver: true
+            })
+              .start()
+
+            Animated.timing(offsetValue, {
+              // YOur Random Value...
+              toValue: showMenu ? 0 : 230,
+              duration: 300,
+              useNativeDriver: true
+            })
+              .start()
+
+            Animated.timing(closeButtonOffset, {
+              // YOur Random Value...
+              toValue: !showMenu ? -30 : 0,
+              duration: 300,
+              useNativeDriver: true
+            })
+              .start()
+
+            setShowMenu(!showMenu);
+          }}>
+
+            <Image source={showMenu ? close : menu} style={{
+              width: 20,
+              height: 20,
+              tintColor: 'black',
+              marginTop: 40,
+
+            }}></Image>
+
+          </TouchableOpacity>
+                <Text style={{bottom: -40, fontSize: 40, color: 'black', left: 50}}>
+                    0.00001 KVC
+                </Text>
+            <TouchableOpacity style={styles.button}>
+                <Button
+                    title="Faire 1h de sport"
+                    onPress={() => navigation.navigate('Faire 1h de sport')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Button
+                    title="Remplir ou ranger le lave vaiselle"
+                    onPress={() => navigation.navigate('Remplir ou ranger le lave vaiselle')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Button
+                    title="Faire le ménage"
+                    onPress={() => navigation.navigate('Faire le ménage')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Button
+                    title="Faire à manger"
+                    onPress={() => navigation.navigate('Faire à manger')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Button
+                    title="Faire le linge"
+                    onPress={() => navigation.navigate('Faire le linge')}
+                />
+            </TouchableOpacity>
+            <View style={{bottom: -120}}>
+                <Button
+                    title="Contactez-nous"
+                    color='red'
+                    onPress={() => navigation.navigate('Contactez-nous')}
+                />
+            </View>
+        </Animated.View>
+
+      </Animated.View>
+
+    </SafeAreaView>
+  );
+}
+
+// For multiple Buttons...
+const TabButton = (currentTab, setCurrentTab, title, image) => {
+  return (
+
+    <TouchableOpacity onPress={() => {
+      if (title == "Logout") {
+        // Do your Stuff...
+      } else {
+        setCurrentTab(title)
+      }
+    }}>
+      <View style={{
+        flexDirection: "row",
+        alignItems: 'center',
+        paddingVertical: 8,
+        backgroundColor: currentTab == title ? 'white' : 'transparent',
+        paddingLeft: 13,
+        paddingRight: 35,
+        borderRadius: 8,
+        marginTop: 15
+      }}>
+
+        <Image source={image} style={{
+          width: 25, height: 25,
+          tintColor: currentTab == title ? "black" : "white"
+        }}></Image>
+
+        <Text style={{
+          fontSize: 15,
+          fontWeight: 'bold',
+          paddingLeft: 15,
+          color: currentTab == title ? "black" : "white"
+        }}>{title}</Text>
+
+      </View>
+    </TouchableOpacity>
+  );
+}
+
 function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="MotivApp" component={HomeScreen} />
+                <Stack.Screen name="MotivApp" component={HomeScreen2} />
                 <Stack.Screen name="Create account" component={AccountScreen} />
                 <Stack.Screen name="Contactez-nous" component={ContactScreen} />
                 <Stack.Screen name="Faire 1h de sport" component={SportScreen} />
@@ -273,6 +513,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'powderblue',
     },
+    container2: {
+      flex: 1,
+      backgroundColor: 'powderblue',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+    },
     input: {
         width: 280,
         height: 50,
@@ -286,6 +532,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         marginBottom: 20,
+        bottom: -100,
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
