@@ -323,11 +323,10 @@ function HomeScreen2({ navigation }) {
           {TabButton(currentTab, setCurrentTab, "Recherche", search)}
           {TabButton(currentTab, setCurrentTab, "Notifications", notifications)}
           {TabButton(currentTab, setCurrentTab, "Réglages", settings)}
-
         </View>
 
         <View>
-          {TabButton(currentTab, setCurrentTab, "Déconnexion", logout)}
+          {/* {TabButton(currentTab, setCurrentTab, "Déconnexion", logout)} */}
         </View>
 
       </View>
@@ -437,7 +436,6 @@ function HomeScreen2({ navigation }) {
             <View style={{bottom: -120}}>
                 <Button
                     title="Contactez-nous"
-                    color='red'
                     onPress={() => navigation.navigate('Contactez-nous')}
                 />
             </View>
@@ -533,7 +531,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 20,
         bottom: -100,
-        backgroundColor: 'black',
+        backgroundColor: 'lightgrey',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -542,7 +540,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 20,
         bottom: -200,
-        backgroundColor: 'black',
+        backgroundColor: 'lightgray',
         justifyContent: 'center',
         alignItems: 'center',
     }
