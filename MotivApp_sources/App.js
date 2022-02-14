@@ -100,26 +100,31 @@ function HomeScreen({ navigation }) {
             <TouchableOpacity style={styles.button}>
                 <Button
                     title="Faire 1h de sport"
+                    onPress={() => navigation.navigate('Faire 1h de sport')}
                 />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <Button
                     title="Remplir ou ranger le lave vaiselle"
+                    onPress={() => navigation.navigate('Remplir ou ranger le lave vaiselle')}
                 />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <Button
                     title="Faire le ménage"
+                    onPress={() => navigation.navigate('Faire le ménage')}
                 />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <Button
                     title="Faire à manger"
+                    onPress={() => navigation.navigate('Faire à manger')}
                 />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <Button
                     title="Faire le linge"
+                    onPress={() => navigation.navigate('Faire le linge')}
                 />
             </TouchableOpacity>
             <View style={{bottom: -50}}>
@@ -133,7 +138,7 @@ function HomeScreen({ navigation }) {
     );
 }
 
-function Contact() {
+function ContactScreen() {
     return (
         <View style={styles.container}>
             <Image source={logo} style={{bottom : 55, width: 350, height : 350}} />
@@ -147,6 +152,102 @@ function Contact() {
     );
 }
 
+function SportScreen({ navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
+                01:00:00
+            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                {'"Il faut viser la lune, parce qu’au moins,\n si vous échouez, vous finirez dans les étoiles."'}
+                {'\n\nOscar Wilde'}
+            </Text>
+            <TouchableOpacity style={styles.buttonTache}>
+                <Button
+                    title="Valider la tâche"
+                    onPress={() => navigation.navigate('MotivApp')}
+                />
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+function MenageScreen({ navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
+                01:00:00
+            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                {'"La meilleure façon de prédire l’avenir\n est de le créer." \n\nPeter Drucker'}
+            </Text>
+            <TouchableOpacity style={styles.buttonTache}>
+                <Button
+                    title="Valider la tâche"
+                    onPress={() => navigation.navigate('MotivApp')}
+                />
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+function MangerScreen({ navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
+                00:30:00
+            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                {'"Croyez en vos rêves et ils se réaliseront peut-être. Croyez en vous et ils se réaliseront sûrement." \n\nMartin Luther King'}
+            </Text>
+            <TouchableOpacity style={styles.buttonTache}>
+                <Button
+                    title="Valider la tâche"
+                    onPress={() => navigation.navigate('MotivApp')}
+                />
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+function LingeScreen({ navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
+                00:30:00
+            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                {'"La sagesse suprême, c’est d’avoir des rêves assez grands pour ne pas les\n perdre de vue pendant qu’on les\n poursuit". \n\nFrancis Scott Fitzgerald'}
+            </Text>
+            <TouchableOpacity style={styles.buttonTache}>
+                <Button
+                    title="Valider la tâche"
+                    onPress={() => navigation.navigate('MotivApp')}
+                />
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+function VaiselleScreen({ navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text style={{fontSize: 50, fontWeight: 'bold', bottom: 130}}>
+                00:30:00
+            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                {'"Ce sont nos choix qui montrent qui\n nous sommes, bien  plus que nos capacités." \n\nJoanne K.Rowling'}
+            </Text>
+            <TouchableOpacity style={styles.buttonTache}>
+                <Button
+                    title="Valider la tâche"
+                    onPress={() => navigation.navigate('MotivApp')}
+                />
+            </TouchableOpacity>
+        </View>
+    );
+}
+
 function App() {
     return (
         <NavigationContainer>
@@ -154,7 +255,12 @@ function App() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="MotivApp" component={HomeScreen} />
                 <Stack.Screen name="Create account" component={AccountScreen} />
-                <Stack.Screen name="Contactez-nous" component={Contact} />
+                <Stack.Screen name="Contactez-nous" component={ContactScreen} />
+                <Stack.Screen name="Faire 1h de sport" component={SportScreen} />
+                <Stack.Screen name="Remplir ou ranger le lave vaiselle" component={VaiselleScreen} />
+                <Stack.Screen name="Faire le ménage" component={MenageScreen} />
+                <Stack.Screen name="Faire à manger" component={MangerScreen} />
+                <Stack.Screen name="Faire le linge" component={LingeScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );
@@ -180,6 +286,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         marginBottom: 20,
+        backgroundColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonTache: {
+        borderRadius: 10,
+        padding: 10,
+        marginBottom: 20,
+        bottom: -200,
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
